@@ -1,0 +1,185 @@
+Script started on 2026-06-09 10:48:02+07:00 [TERM="xterm-256color" TTY="/dev/pts/6" COLUMNS="102" LINES="10"]
+[?2004h]0;naufal@DESKTOP-PSDR4FO: ~[01;32mnaufal@DESKTOP-PSDR4FO[00m:[01;34m~[00m$ docker ls[K[K[Kc[K container ls
+[?2004lCONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS             PORTS                                           NAMES
+463ac1f13e52   nginx     "/docker-entrypoint.…"   9 minutes ago       Up 9 minutes       0.0.0.0:8080->80/tcp, [::]:8080->80/tcp         sad_herschel
+a5db72e4cd2e   mongo     "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp   todo-backend-mongo-1
+[?2004h]0;naufal@DESKTOP-PSDR4FO: ~[01;32mnaufal@DESKTOP-PSDR4FO[00m:[01;34m~[00m$ docker exec -it todo-backend-mongo-1
+[?2004ldocker: 'docker exec' requires at least 2 arguments
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+See 'docker exec --help' for more information
+[?2004h]0;naufal@DESKTOP-PSDR4FO: ~[01;32mnaufal@DESKTOP-PSDR4FO[00m:[01;34m~[00m$ docker exec -it todo-backend-mongo-1 bash
+[?2004l[?2004hroot@a5db72e4cd2e:/# mongosh
+[?2004l]0;mongosh mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	6a278d4059a1a794a79df8a2
+Connecting to:		[1m[32mmongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.3[0m
+Using MongoDB:		undefined
+[1m[33mUsing Mongosh[0m:		2.8.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+[1G[0J [1G[?2004h[1G[0Jtest> [7Gshow dbs
+Uncaught [1m[31mMongoServerError[0m[1m[31m[Unauthorized][0m: Command listDatabases requires authentication
+[1G[0Jtest> [7G[1G[0Jtest> show dbs[15G -u root -p example [1G[0Jtest> show dbs -u root -p example[34G
+Uncaught [1m[31mMongoServerError[0m[1m[31m[Unauthorized][0m: Command listDatabases requires authentication
+[1G[0Jtest> [7Gshw[1G[0Jtest> sh[9G[1G[0Jtest> s[8G[1G[0Jtest> [7Gshow --help
+Uncaught [1m[31mMongoshInvalidInputError[0m: [COMMON-10001] '--help' is not a valid argument for "show".
+[1G[0Jtest> [7Gexit
+[?2004l]0;[?2004hroot@a5db72e4cd2e:/# mongosh --help
+[?2004l
+  $ mongosh [options] [db address] [file names (ending in .js or .mongodb)]
+
+  Options:
+
+    -h, --help                                 Show this usage information
+    -f, --file [arg]                           Load the specified mongosh script
+        --host [arg]                           Server to connect to
+        --port [arg]                           Port to connect to
+        --build-info                           Show build information
+        --version                              Show version information
+        --quiet                                Silence output from the shell during the connection process
+        --shell                                Run the shell after executing files
+        --nodb                                 Don't connect to mongod on startup - no 'db address' [arg] expected
+        --norc                                 Will not run the '.mongoshrc.js' file on start up
+        --eval [arg]                           Evaluate javascript
+        --json[=canonical|relaxed]             Print result of --eval as Extended JSON, including errors
+        --retryWrites[=true|false]             Automatically retry write operations upon transient network errors (Default: true)
+        --deep-inspect[=true|false]           Force full depth inspection of server results (default: true if in interactive mode)
+
+  Authentication Options:
+
+    -u, --username [arg]                       Username for authentication
+    -p, --password [arg]                       Password for authentication
+        --authenticationDatabase [arg]         User source (defaults to dbname)
+        --authenticationMechanism [arg]        Authentication mechanism
+        --awsIamSessionToken [arg]             AWS IAM Temporary Session Token ID
+        --gssapiServiceName [arg]              Service name to use when authenticating using GSSAPI/Kerberos
+        --sspiHostnameCanonicalization [arg]   Specify the SSPI hostname canonicalization (none or forward, available on Windows)
+        --sspiRealmOverride [arg]              Specify the SSPI server realm (available on Windows)
+
+  TLS Options:
+
+        --tls                                  Use TLS for all connections
+        --tlsCertificateKeyFile [arg]          PEM certificate/key file for TLS
+        --tlsCertificateKeyFilePassword [arg]  Password for key in PEM file for TLS
+        --tlsCAFile [arg]                      Certificate Authority file for TLS
+        --tlsAllowInvalidHostnames             Allow connections to servers with non-matching hostnames
+        --tlsAllowInvalidCertificates          Allow connections to servers with invalid certificates
+        --tlsCertificateSelector [arg]         TLS Certificate in system store (Windows and macOS only)
+        --tlsCRLFile [arg]                     Specifies the .pem file that contains the Certificate Revocation List
+        --tlsDisabledProtocols [arg]           Comma separated list of TLS protocols to disable [TLS1_0,TLS1_1,TLS1_2]
+        --tlsFIPSMode                          Enable the system TLS library's FIPS mode
+
+  API version options:
+
+        --apiVersion [arg]                     Specifies the API version to connect with
+        --apiStrict                            Use strict API version mode
+        --apiDeprecationErrors                 Fail deprecated commands for the specified API version
+
+  FLE Options:
+
+        --awsAccessKeyId [arg]                 AWS Access Key for FLE Amazon KMS
+        --awsSecretAccessKey [arg]             AWS Secret Key for FLE Amazon KMS
+        --awsSessionToken [arg]                Optional AWS Session Token ID
+        --keyVaultNamespace [arg]              database.collection to store encrypted FLE parameters
+        --kmsURL [arg]                         Test parameter to override the URL of the KMS endpoint
+
+  OIDC auth options:
+
+        --oidcFlows[=auth-code,device-auth]    Supported OIDC auth flows
+        --oidcRedirectUri[=url]                Local auth code flow redirect URL [http://localhost:27097/redirect]
+        --oidcTrustedEndpoint                  Treat the cluster/database mongosh as a trusted endpoint
+        --oidcIdTokenAsAccessToken             Use ID tokens in place of access tokens for auth
+        --oidcDumpTokens[=mode]                Debug OIDC by printing tokens to mongosh's output [redacted|include-secrets]
+        --oidcNoNonce                          Don't send a nonce argument in the OIDC auth request
+
+  DB Address Examples:
+
+        foo                                    Foo database on local machine
+        192.168.0.5/foo                        Foo database on 192.168.0.5 machine
+        192.168.0.5:9999/foo                   Foo database on 192.168.0.5 machine on port 9999
+        mongodb://192.168.0.5:9999/foo         Connection string URI can also be used
+
+  File Names:
+
+        A list of files to run. Files must end in .js and will exit after unless --shell is specified.
+
+  Examples:
+
+        Start mongosh using 'ships' database on specified connection string:
+        $ mongosh mongodb://192.168.0.5:9999/ships
+
+  For more information on usage: https://mongodb.com/docs/mongodb-shell.
+[?2004hroot@a5db72e4cd2e:/# mongosh --help     u root -p example
+[?2004l]0;mongosh mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	6a278e125037a0688b9df8a2
+Connecting to:		[1m[32mmongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.3[0m
+Using MongoDB:		8.2.9
+[1m[33mUsing Mongosh[0m:		2.8.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+[1G[0J [1G[?2004h[1m[33m------[0m
+   [1m[33mThe server generated these startup warnings when booting[0m
+   2026-06-09T02:47:59.644+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2026-06-09T02:48:00.202+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-06-09T02:48:00.202+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-06-09T02:48:00.202+00:00: We suggest setting the contents of sysfsFile to 0.
+   2026-06-09T02:48:00.202+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+[1m[33m------[0m
+
+[1G[0Jtest> [7Gshows dbs[1G[0Jtest> shows db[15G[1G[0Jtest> shows d[14G[1G[0Jtest> shows [13G[1G[0Jtest> shows[12G[1G[0Jtest> show[11G dbs
+[1madmin[0m         100.00 KiB
+[1mconfig[0m        108.00 KiB
+[1mlocal[0m          72.00 KiB
+[1mthe_database[0m   56.00 KiB
+[1G[0Jtest> [7Gused[1G[0Jtest> use[10G the)[1G[0Jtest> use the[14G_database
+switched to db the_database
+[1G[0Jthe_database> [15Gshow collections
+[1mtodos[0m
+[1G[0Jthe_database> [15Gdb.todosinf[1G[0Jthe_database> db.todosin[25G[1G[0Jthe_database> db.todosi[24G[1G[0Jthe_database> db.todos[23G.find({})
+[
+  {
+    _id: ObjectId([32m'6a277ede6dfc42ca709df8a3'[39m),
+    text: [32m'Write code'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'6a277ede6dfc42ca709df8a4'[39m),
+    text: [32m'Learn about containers'[39m,
+    done: [33mtrue[39m
+  }
+]
+[1G[0Jthe_database> [15Gdb-[1G[0Jthe_database> db[17G.too[1G[0Jthe_database> db.to[20Gdos.i[1G[0Jthe_database> db.todos.[24GinsertOne({text[33mtext[39m: [32m"[39m[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [41G[32m'[39m[32m'[39m[1D[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49m'[39m[42G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mO'[39m[43G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mOI'[39m[44G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mO'[39m[43G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49m'[39m[42G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mI'[39m[43G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIn'[39m[44G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mInc'[39m[45G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncr'[39m[46G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncre'[39m[47G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrea'[39m[48G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncreat'[39m[49G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncreate'[39m[50G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncreates'[39m[51G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncreate'[39m[50G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncreat'[39m[49G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrea'[39m[48G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncreas'[39m[49G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease'[39m[50G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease '[39m[51G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease t'[39m[52G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease th'[39m[53G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the'[39m[54G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the '[39m[55G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the u'[39m[56G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the ub'[39m[57G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the u'[39m[56G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the '[39m[55G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the n'[39m[56G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the nu'[39m[57G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the num'[39m[58G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the numb'[39m[59G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the numbe'[39m[60G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number'[39m[61G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number '[39m[62G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number o'[39m[63G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of'[39m[64G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of '[39m[65G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of t'[39m[66G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of to'[39m[67G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of too'[39m[68G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tool'[39m[69G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools'[39m[70G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools '[39m[71G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools i'[39m[72G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in'[39m[73G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in '[39m[74G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in m'[39m[75G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my'[39m[76G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my '[39m[77G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my t'[39m[78G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my to'[39m[79G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my too'[39m[80G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my tool'[39m[81G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my tool '[39m[82G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my tool b'[39m[83G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my tool be'[39m[84G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my tool bel'[39m[85G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [44m[32m'[49mIncrease the number of tools in my tool belt'[39m[86G[1C[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the number of tools in my tool belt'[39m[87G, d[36mdo[39mdone: fals[33mfalse[39m})[1D[1G[0Jthe_database> db.todos.insertOne[44m([49m{[33mtext[39m: [32m'Increase the number of tools in my tool belt'[39m, [33mdone[39m: [33mfalse[39m})[101G[1C[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the number of tools in my tool belt'[39m, [33mdone[39m: [33mfalse[39m})[102G
+{
+  acknowledged: [33mtrue[39m,
+  insertedId: ObjectId([32m'6a278ed65037a0688b9df8a3'[39m)
+}
+[1G[0Jthe_database> [15Gdb.todos.if[1G[0Jthe_database> db.todos.i[25G[1G[0Jthe_database> db.todos.[24Gfind({)[1G[0Jthe_database> db.todos.find({[30G})
+[
+  {
+    _id: ObjectId([32m'6a277ede6dfc42ca709df8a3'[39m),
+    text: [32m'Write code'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'6a277ede6dfc42ca709df8a4'[39m),
+    text: [32m'Learn about containers'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'6a278ed65037a0688b9df8a3'[39m),
+    text: [32m'Increase the number of tools in my tool belt'[39m,
+    done: [33mfalse[39m
+  }
+]
+[1G[0Jthe_database> [15Gexit
+[?2004l]0;[?2004hroot@a5db72e4cd2e:/# exit
+[?2004lexit
+[?2004h]0;naufal@DESKTOP-PSDR4FO: ~[01;32mnaufal@DESKTOP-PSDR4FO[00m:[01;34m~[00m$ exit
+[?2004lexit
+
+Script done on 2026-06-09 10:56:39+07:00 [COMMAND_EXIT_CODE="0"]
